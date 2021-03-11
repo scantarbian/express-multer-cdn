@@ -4,9 +4,9 @@ const cors = require('cors')
 
 //express variables
 const app = express()
-const port = 2000
+const port = process.env.PORT
 const corsOptions = {
-    origin: 'https://dev.scantarbian.live',
+    origin: process.env.TARGET_URL,
     optionsSuccessStatus: 200
 }
 
