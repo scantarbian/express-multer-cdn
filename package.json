@@ -1,0 +1,17 @@
+{
+  "name": "cdn",
+  "version": "1.0.0",
+  "description": "Content Delivery Network for scantarbian.live",
+  "main": "index.js",
+  "scripts": {
+    "dev": "DEBUG=express:* node index.js",
+    "start": "node index.js"
+  },
+  "author": "scantarbian",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "multer": "^1.4.2"
+  }
+}
