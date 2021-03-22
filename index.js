@@ -11,6 +11,8 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
+app.use(cors(corsOptions))
+
 app.listen(port, () => {
     console.log(`CDN active at http://localhost:${port}`)
 })
@@ -42,13 +44,13 @@ const docsStorage = multer.diskStorage({
 const uploadImage = multer({ storage: imageStorage })
 const uploadDocs = multer({ storage: docsStorage })
 
-app.post('/image', cors(corsOptions), uploadImage.single("profileImage"), (req,res,next)=>{
+app.post('/image', uploadImage.single("profileImage"), (req,res,next)=>{
     res.status(200).send({
         url: req.file.path
     })
 })
 
-app.post('/docs', cors(corsOptions), uploadDocs.single("attachment"), (req,res,next)=>{
+app.post('/docs', uploadDocs.single("attachment"), (req,res,next)=>{
     res.status(200).send({
         url: req.file.path
     })
