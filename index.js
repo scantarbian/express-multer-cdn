@@ -25,7 +25,7 @@ app.options('*', cors(corsOptions))
 //multer settings
 const imageStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'public/uploads/images',)
+      cb(null, `public/uploads/${req.body.owner}`,)
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname)
@@ -34,7 +34,7 @@ const imageStorage = multer.diskStorage({
 
 const docsStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, `public/uploads/docs`,)
+      cb(null, `public/uploads/${req.body.owner}/${req.body.request}`,)
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname)

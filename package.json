@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "DEBUG=express:* node index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "restart": "pm2 reload 1"
   },
   "author": "scantarbian",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "multer": "^1.4.2"
   }
