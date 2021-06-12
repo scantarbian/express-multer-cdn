@@ -61,7 +61,7 @@ app.post('/docs', uploadDocs.single("attachment"), (req,res,next)=>{
   })
 })
 
-app.delete('/docs', (req, res) => {
+app.post('/remove_docs', (req, res) => {
   const body = JSON.parse(req.body)
   const path = `public/uploads/${body.owner}/${body.request}/${body.fileName}`
 
