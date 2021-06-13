@@ -27,7 +27,7 @@ app.options('*', cors(corsOptions))
 const imageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     const path = `public/uploads/${req.body.owner}`
-    fs.mkdir(path,{recursive: true})
+    fs.mkdirSync(path,{recursive: true})
     cb(null, path)
   },
   filename: function (req, file, cb) {
@@ -38,7 +38,7 @@ const imageStorage = multer.diskStorage({
 const docsStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     const path = `public/uploads/${req.body.owner}/${req.body.request}`
-    fs.mkdir(path,{recursive: true})
+    fs.mkdirSync(path,{recursive: true})
     cb(null, path)
   },
   filename: function (req, file, cb) {
@@ -48,6 +48,7 @@ const docsStorage = multer.diskStorage({
 
 const uploadImage = multer({ storage: imageStorage })
 const uploadDocs = multer({ storage: docsStorage })
+const parseJson = express.urlencoded({extended: true})
 
 app.post('/image', uploadImage.single("profileImage"), (req,res,next)=>{
   res.status(200).send({
@@ -61,15 +62,17 @@ app.post('/docs', uploadDocs.single("attachment"), (req,res,next)=>{
   })
 })
 
-app.post('/remove_docs', (req, res) => {
-  const body = JSON.parse(req.body)
-  const path = `public/uploads/${body.owner}/${body.request}/${body.fileName}`
+// accepts x-www-form-urlencoded
+app.post('/remove_docs', parseJson, (req, res) => {
+  console.log(req.body)
+  const path = `public/uploads/${req.body.owner}/${req.body.request}/${req.body.fileName}`
 
   fs.unlink(path, (err) => {
     if (err) {
       console.error(err)
       res.status(500).send(err)
+    } else {
+      res.status(200).send('FILE DELETED')
     }
-    res.status(200).send('FILE DELETED')
   })
 })
