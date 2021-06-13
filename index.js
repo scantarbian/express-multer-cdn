@@ -48,7 +48,7 @@ const docsStorage = multer.diskStorage({
 
 const uploadImage = multer({ storage: imageStorage })
 const uploadDocs = multer({ storage: docsStorage })
-const parseJson = express.urlencoded({extended: true})
+const parseJson = express.json()
 
 app.post('/image', uploadImage.single("profileImage"), (req,res,next)=>{
   res.status(200).send({
@@ -62,7 +62,7 @@ app.post('/docs', uploadDocs.single("attachment"), (req,res,next)=>{
   })
 })
 
-// accepts x-www-form-urlencoded
+// accepts application/json
 app.post('/remove_docs', parseJson, (req, res) => {
   console.log(req.body)
   const path = `public/uploads/${req.body.owner}/${req.body.request}/${req.body.fileName}`
