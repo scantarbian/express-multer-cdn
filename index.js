@@ -64,7 +64,6 @@ app.post('/docs', uploadDocs.single("attachment"), (req,res,next)=>{
 
 // accepts application/json
 app.post('/remove_docs', parseJson, (req, res) => {
-  console.log(req.body)
   const path = `public/uploads/${req.body.owner}/${req.body.request}/${req.body.fileName}`
 
   fs.unlink(path, (err) => {
